@@ -172,6 +172,7 @@ void segregate(char *line)
             i = 0;
         }
 
+
         if(line[j] == '\'')
         {
             tok[i++] = line[j++];
@@ -179,11 +180,15 @@ void segregate(char *line)
             if(line[j+1] == '\'')
             {
                 tok[i++] = line[j++];
-                tok[i++] = line[j];
+                tok[i++] = line[j++];
+                if(line[j] == '\'')
+                    tok[i++] = line[j];
+                else
+                    j--;
                 tok[i] = '\0';
                 printf(BLUE"CHARACTER -> %s\n"RESET, tok);
             }
-            else if(line[j+1] == '0' && line[j] == '\\')
+            else if((line[j+1] == '0' && line[j] == '\\') || line[j+1] == '\\')
             {
                 tok[i++] = line[j++];
                 tok[i++] = line[j++];
@@ -221,7 +226,6 @@ int main(int argc, char *argv[])
 
     while (fgets(line, sizeof(line), file))
     {
-        printf("%s\n", line); //print the line read from file
         i = 0;
         while(line[i] != '\0')
         {
@@ -249,7 +253,8 @@ int main(int argc, char *argv[])
                         printf(RED "Error: Unterminated comment\n" RESET);
                         return 1;
                     }
-                    else{
+                    else
+                    {
                         break;
                     }
                 }
@@ -266,13 +271,13 @@ int main(int argc, char *argv[])
             }
             else if(line[i] == '{')
             {
-                printf(YELLOW "OPERATOR -> %C\n" RESET, '{');
-                flower++;
+                printf(YELLOW "OPERATOR -> { \n" RESET);
+                flower++;                
             }
             else if(line[i] == '}')
             {
-                printf(YELLOW "OPERATOR -> %C\n" RESET, '}');
-                flower--;
+                printf(YELLOW "OPERATOR -> } \n" RESET);
+                flower--;                
             }
             else if(isalnum(line[i]) )
             {
@@ -296,6 +301,6 @@ int main(int argc, char *argv[])
   
     if(flower)
     {
-        printf(RED"ERROR: unterminated '}' brackets\n"RESET);
+        printf(RED"ERROR: unterminated %d '}' brackets\n"RESET, flower);
     }
 }
