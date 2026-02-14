@@ -166,7 +166,7 @@ Token getNextToken(FILE *file)
     }
     else if (isdigit(c))
     {
-        // number
+       
         int i = 0;
         token.value[i++] = c;
         while ((c = fgetc(file)) != EOF && (isdigit(c) || c == '.' || c == 'e' || c == 'E' || c == '+' || c == '-' || (i==1 && c=='x') || (i==1 && c=='X')))
