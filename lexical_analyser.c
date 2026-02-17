@@ -168,7 +168,7 @@ void segregate(char *line)
             }
             tok[i++] = '"';
             tok[i] = '\0';
-            printf(CYAN "STRING LITERAL -> %s\n" RESET, tok);
+            printf(GREEN "STRING LITERAL -> %s\n" RESET, tok);
             i = 0;
         }
 
