@@ -11,6 +11,7 @@ int main(int argc, char *argv[])
     if(a == 20 && 10 == 10 || 100 == 20)
     {
         printf("hello");
-    }
+    
     return 0;
+    }
 }
